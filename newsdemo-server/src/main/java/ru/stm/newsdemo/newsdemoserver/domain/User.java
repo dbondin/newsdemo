@@ -1,63 +1,62 @@
 package ru.stm.newsdemo.newsdemoserver.domain;
 
-import java.math.BigInteger;
-
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
-@Table(name="ND_USERS")
+@Table(name = "ND_USERS")
 public class User {
-	
+
 	@Id
-	
-	private BigInteger ID;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ND_USERS_ID_SEQ")
+	@SequenceGenerator(sequenceName = "ND_USERS_ID_SEQ", allocationSize = 1, name = "ND_USERS_ID_SEQ")
+	private Long id;
+	@Column(name = "username")
+	private String username;
+	@Column(name = "password")
+	private String password;
 
-    private String USERNAME;
+	protected User() {
+	}
 
-    private String PASSWORD;
-    
-   protected User() {}
-    
-    public User(BigInteger ID,String USERNAME,String PASSWORD) {
-    	this.ID=ID;
-    	this.USERNAME=USERNAME;
-    	this.PASSWORD=PASSWORD;
-    	
-    }
-    public BigInteger getID() {
-        return ID;
-    }
- 
-    public void setID(BigInteger ID) {
-        this.ID = ID;
-    }
- 
-    public String getUSERNAME() {
-        return USERNAME;
-    }
- 
-    public void setUSERNAME(String USERNAME) {
-        this.USERNAME = USERNAME;
-    }
- 
-    public String getPASSWORD() {
-        return PASSWORD;
-    }
- 
-    public void setPASSWORD(String PASSWORD) {
-        this.PASSWORD = PASSWORD;
-    }
- 
-    @Override
-    public String toString() {
-        return String.format(
-                "ID[ID=%d, USERNAME='%s', PASSWORD='%s']",
-                ID, USERNAME, PASSWORD);
-    }
+	public User(String username, String password) {
+		this.username = username;
+		this.password = password;
 
-	
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("ID[ID=%d, USERNAME='%s', PASSWORD='%s']", id, username, password);
+	}
 
 }
