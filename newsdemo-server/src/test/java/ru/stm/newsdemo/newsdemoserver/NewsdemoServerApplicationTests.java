@@ -1,47 +1,45 @@
 package ru.stm.newsdemo.newsdemoserver;
 
-import java.math.BigInteger;
-
-import javax.sql.DataSource;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import ru.stm.newsdemo.newsdemoserver.domain.User;
-import ru.stm.newsdemo.newsdemoserver.repositories.UserRepository;
+import ru.stm.newsdemo.newsdemoserver.service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class NewsdemoServerApplicationTests {
-	  @Autowired
-	    DataSource dataSource;
-
-	    @Autowired
-	    UserRepository userRepository;
-	   
+	
+	private final Logger logger = LoggerFactory.getLogger(NewsdemoServerApplicationTests.class);
+	
+	@Autowired
+	private UserService userService;
 
 	@Test
-	public void contextLoads() {
-	
-		userRepository.save(new User("newsdemo1","newsdemo1"));
-    	userRepository.save(new User("newsdemo2","newsdemo2"));
-    	userRepository.save(new User("newsdemo3","newsdemo3"));
-    	 System.out.println("\n1.findAll()...");
-	        for (User u : userRepository.findAll()) {
-	           u.toString();
-	        }
+	public void firstTest() {
 
-	        System.out.println("\n2.findByUSERNAME(String USERNAME)...");
-	        for (User u : userRepository.findByUsername("newsdemo1")) {
-	          u.toString();
-	        }
+		logger.info("Creating testing entities");
+		for (int i = 1; i <= 3; ++i) {
+			final User u = new User();
+			u.setUsername("newsdemo" + i);
+			u.setPassword("newsdemo" + i);
+			logger.info("saving {}", u);
+			userService.save(u);
+		}
+		logger.info("Testing findAll()");
+		for (User u : userService.findAll()) {
+			logger.info("{}", u);
+		}
 
-	        System.out.println("\n3.findById(Id)...");
-	        this.userRepository.findById(2L).toString();
-	
+		logger.info("Testing findByUsername()");
+		logger.info("{}", userService.findByUsername("newsdemo1").get());
+
+		logger.info("Tesfing findById()");
+		logger.info("{}", this.userService.findById(1L).get());
 	}
-
 }

@@ -13,23 +13,20 @@ import javax.persistence.SequenceGenerator;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ND_USERS_ID_SEQ")
-	@SequenceGenerator(sequenceName = "ND_USERS_ID_SEQ", allocationSize = 1, name = "ND_USERS_ID_SEQ")
+	@Column(name = "ID", nullable = false, unique = true)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "UserIdSequenceGenerator")
+	@SequenceGenerator(sequenceName = "ND_USERS_ID_SEQ", name = "UserIdSequenceGenerator", allocationSize = 1)
 	private Long id;
-	@Column(name = "username")
+
+	@Column(name = "username", nullable = false, unique = true)
 	private String username;
-	@Column(name = "password")
+
+	@Column(name = "password", nullable = false, unique = false)
 	private String password;
 
-	protected User() {
+	public User() {
 	}
-
-	public User(String username, String password) {
-		this.username = username;
-		this.password = password;
-
-	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -56,7 +53,6 @@ public class User {
 
 	@Override
 	public String toString() {
-		return String.format("ID[ID=%d, USERNAME='%s', PASSWORD='%s']", id, username, password);
+		return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
 	}
-
 }
