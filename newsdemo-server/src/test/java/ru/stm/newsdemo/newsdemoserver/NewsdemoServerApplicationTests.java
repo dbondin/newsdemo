@@ -39,7 +39,7 @@ public class NewsdemoServerApplicationTests {
 		}
 
 		logger.info("Testing findByUsername()");
-		logger.info("{}", userService.findByUsername("newsdemo1").get());
+		//logger.info("{}", userService.findByUsername("newsdemo1").get());
 
 		logger.info("Tesfing findById()");
 		logger.info("{}", this.userService.findById(1L).get());
