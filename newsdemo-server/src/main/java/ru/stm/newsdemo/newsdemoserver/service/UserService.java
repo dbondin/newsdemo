@@ -1,5 +1,6 @@
 package ru.stm.newsdemo.newsdemoserver.service;
 
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class UserService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Optional<User> findByUsername(final String username) {
+	public User findByUsername(final String username) {
 		return userRepository.findByUsername(username);
 	}
 	
@@ -34,4 +35,6 @@ public class UserService {
 	public Optional<User> findById(final Long id) {
 		return userRepository.findById(id);
 	}
+
+
 }
