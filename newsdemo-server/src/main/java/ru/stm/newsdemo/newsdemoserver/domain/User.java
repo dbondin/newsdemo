@@ -1,13 +1,19 @@
 package ru.stm.newsdemo.newsdemoserver.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
-
+import javax.persistence.JoinColumn;
 @Entity
 @Table(name = "ND_USERS")
 public class User {
@@ -23,10 +29,33 @@ public class User {
 
 	@Column(name = "password", nullable = false, unique = false)
 	private String password;
+	
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(
+			  name = "USERS_ROLES", 
+			  joinColumns = @JoinColumn(name = "USER_ID"), 
+			  inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+   private Set<Role> roles=new HashSet<>();
 
 	public User() {
 	}
-	
+	public User(String username,String password) {
+		this.username=username;
+		this.password=password;
+	}
+	public void addRole(Role role) {
+		
+		roles.add( role );
+		role.getUsers().add( this );
+	}
+
+	public void removeRole(Role role) {
+		roles.remove( role );
+		role.getUsers().remove( this );
+		
+		
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -50,7 +79,13 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public Set<Role> getRoles() {
+        return roles;
+    }
 
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
