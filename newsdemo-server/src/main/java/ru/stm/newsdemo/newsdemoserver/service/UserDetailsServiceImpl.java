@@ -21,15 +21,13 @@ import java.util.Set;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
-    @Autowired
-    private UserRepository userRepository;
 @Autowired
 UserService userService;
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-    	User user = userRepository.findByUsername(username);
-        if (user == null) throw new UsernameNotFoundException(username);
+    	User user = userService.findByUsername(username).get();
+    	if (user == null) throw new UsernameNotFoundException(username);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()){
