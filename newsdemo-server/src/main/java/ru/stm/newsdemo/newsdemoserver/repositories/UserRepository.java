@@ -10,5 +10,5 @@ import ru.stm.newsdemo.newsdemoserver.domain.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
-	User findByUsername(String username);
+	Optional<User> findByUsername(String username);
 }
