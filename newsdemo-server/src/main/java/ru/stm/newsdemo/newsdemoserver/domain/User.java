@@ -32,29 +32,19 @@ public class User {
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
-			  name = "USERS_ROLES", 
+			  name = "ND_USERS_ROLES", 
 			  joinColumns = @JoinColumn(name = "USER_ID"), 
 			  inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
    private Set<Role> roles=new HashSet<>();
 
 	public User() {
 	}
-	public User(String username,String password) {
+	public User(String username,String password,Set<Role>roles) {
 		this.username=username;
 		this.password=password;
+		this.roles=roles;
 	}
-	public void addRole(Role role) {
-		
-		roles.add( role );
-		role.getUsers().add( this );
-	}
-
-	public void removeRole(Role role) {
-		roles.remove( role );
-		role.getUsers().remove( this );
-		
-		
-	}
+	
 
 	public Long getId() {
 		return id;
