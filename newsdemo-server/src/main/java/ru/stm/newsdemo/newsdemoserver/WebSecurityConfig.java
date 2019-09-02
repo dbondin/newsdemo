@@ -42,10 +42,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            .logout()
 	                .permitAll();
 	    }
-    @Bean
-    public AuthenticationManager customAuthenticationManager() throws Exception {
-        return authenticationManager();
-    }
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
