@@ -1,6 +1,5 @@
 package ru.stm.newsdemo.newsdemoserver.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,21 +19,24 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService{
-@Autowired
-UserService userService;
-    @Override
-    @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) {
-    	User user = userService.findByUsername(username).get();
-    	if (user == null) throw new UsernameNotFoundException(username);
+public class UserDetailsServiceImpl implements UserDetailsService {
+	@Autowired
+	UserService userService;
 
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        for (Role role : user.getRoles()){
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
+	@Override
+	@Transactional(readOnly = true)
+	public UserDetails loadUserByUsername(String username) {
+		User user = userService.findByUsername(username).get();
+		if (user == null)
+			throw new UsernameNotFoundException(username);
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
-    }
-	
+		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+		for (Role role : user.getRoles()) {
+			grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+		}
+
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+				grantedAuthorities);
+	}
+
 }
