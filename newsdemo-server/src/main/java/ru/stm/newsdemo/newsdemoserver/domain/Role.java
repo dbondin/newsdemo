@@ -1,41 +1,40 @@
 package ru.stm.newsdemo.newsdemoserver.domain;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "ND_ROLES")
 
 public class Role {
-    @Id
-    @Column(name="ID",nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RoleIdSequenceGenerator")
+	@Id
+	@Column(name = "ID", nullable = false, unique = true)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RoleIdSequenceGenerator")
 	@SequenceGenerator(sequenceName = "ND_ROLES_ID_SEQ", name = "RoleIdSequenceGenerator", allocationSize = 1)
-    private Long id;
-    @Column(name="NAME",nullable = false, unique = true)
-    private String name;
-    @Column (name="CAN_CREATE_NEW_ARTICLE",nullable=false,unique=true)
-    private boolean canCreateNewArticle;
-    @Column (name="CAN_MODIFY_OWN_ARTICLE",nullable=false,unique=true)
-    private boolean canModifyOwnArticle;
-    @Column (name="CAN_DELETE_ARTICLE",nullable=false,unique=true)
-    private boolean canDeleteArticle;
-    @Column (name="CAN_MODIFY_ARTICLE",nullable=false,unique=true)
-    private boolean canModifyArticle;
-    @Column (name="CAN_ADD_USER",nullable=false,unique=true)
-    private boolean canAddUser;
-    @Column (name="CAN_DELETE_USER",nullable=false,unique=true)
-    private boolean canDeleteUser;
-    @Column (name="CAN_MODIFY_USER",nullable=false,unique=true)
-    private boolean canModifyUser;
-    @Column (name="CAN_CREATE_ROLE",nullable=false,unique=true)
-    private boolean canCreateRole;
-    @Column (name="CAN_DELETE_ROLE",nullable=false,unique=true)
-    private boolean canDeleteRole;
-    @Column (name="CAN_MODIFY_ROLE",nullable=false,unique=true)
-    private boolean canModifyRole;
+	private Long id;
+	@Column(name = "NAME", nullable = false, unique = true)
+	private String name;
+	@Column(name = "CAN_CREATE_NEW_ARTICLE", nullable = false, unique = false)
+	private boolean canCreateNewArticle;
+	@Column(name = "CAN_MODIFY_OWN_ARTICLE", nullable = false, unique = false)
+	private boolean canModifyOwnArticle;
+	@Column(name = "CAN_DELETE_ARTICLE", nullable = false, unique = false)
+	private boolean canDeleteArticle;
+	@Column(name = "CAN_MODIFY_ARTICLE", nullable = false, unique = false)
+	private boolean canModifyArticle;
+	@Column(name = "CAN_ADD_USER", nullable = false, unique = false)
+	private boolean canAddUser;
+	@Column(name = "CAN_DELETE_USER", nullable = false, unique = false)
+	private boolean canDeleteUser;
+	@Column(name = "CAN_MODIFY_USER", nullable = false, unique = false)
+	private boolean canModifyUser;
+	@Column(name = "CAN_CREATE_ROLE", nullable = false, unique = false)
+	private boolean canCreateRole;
+	@Column(name = "CAN_DELETE_ROLE", nullable = false, unique = false)
+	private boolean canDeleteRole;
+	@Column(name = "CAN_MODIFY_ROLE", nullable = false, unique = false)
+	private boolean canModifyRole;
 
-    public boolean isCanCreateNewArticle() {
+	public boolean isCanCreateNewArticle() {
 		return canCreateNewArticle;
 	}
 
@@ -116,32 +115,37 @@ public class Role {
 	}
 
 	public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public Role() {}
-public Role(String name, boolean canCreateNewArticle,boolean canModifyOwnArticle,boolean canDeleteArticle, boolean canModifyArticle, boolean canAddUser, boolean canDeleteUser, boolean canModifyUser, boolean canCreateRole, boolean canDeleteRole, boolean canModifyRole) {
-	this.name=name;
-	this.canAddUser=canAddUser;
-	this.canCreateNewArticle=canCreateNewArticle;
-	this.canCreateRole=canCreateRole;
-	this.canDeleteArticle=canDeleteArticle;
-	this.canDeleteRole=canDeleteRole;
-	this.canDeleteUser=canDeleteUser;
-	this.canModifyArticle=canModifyArticle;
-	this.canModifyOwnArticle=canModifyOwnArticle;
-	this.canModifyRole=canModifyRole;
-	this.canModifyUser=canModifyUser;
-}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Role() {
+	}
+
+	public Role(String name, boolean canCreateNewArticle, boolean canModifyOwnArticle, boolean canDeleteArticle,
+			boolean canModifyArticle, boolean canAddUser, boolean canDeleteUser, boolean canModifyUser,
+			boolean canCreateRole, boolean canDeleteRole, boolean canModifyRole) {
+		this.name = name;
+		this.canAddUser = canAddUser;
+		this.canCreateNewArticle = canCreateNewArticle;
+		this.canCreateRole = canCreateRole;
+		this.canDeleteArticle = canDeleteArticle;
+		this.canDeleteRole = canDeleteRole;
+		this.canDeleteUser = canDeleteUser;
+		this.canModifyArticle = canModifyArticle;
+		this.canModifyOwnArticle = canModifyOwnArticle;
+		this.canModifyRole = canModifyRole;
+		this.canModifyUser = canModifyUser;
+	}
 }
