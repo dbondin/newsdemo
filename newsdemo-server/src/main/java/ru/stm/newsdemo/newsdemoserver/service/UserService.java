@@ -2,48 +2,17 @@ package ru.stm.newsdemo.newsdemoserver.service;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import ru.stm.newsdemo.newsdemoserver.domain.User;
-import ru.stm.newsdemo.newsdemoserver.repositories.UserRepository;
 
-@Service
-public class UserService {
+public interface UserService {
 
-	@Autowired
-	private UserRepository userRepository;
+	public User save(final User user);
 
-	@Transactional(readOnly = false)
-	public User save(final User user) {
-		return userRepository.save(user);
-	}
+	public Iterable<User> findAll();
 
-	@Transactional(readOnly = true)
-	public Iterable<User> findAll() {
-		return userRepository.findAll();
-	}
+	public Optional<User> findByUsername(final String username);
 
-	@Transactional(readOnly = true)
-	public Optional<User> findByUsername(final String username) {
-		return userRepository.findByUsername(username);
-	}
+	public Optional<User> findById(final Long id);
 
-	@Transactional(readOnly = true)
-	public Optional<User> findById(final Long id) {
-		return userRepository.findById(id);
-	}
-//public void addRole(Role role) {
-//		roles.add( role );
-//		role.getUsers().add( this );
-//	}
-
-	// public void removeRole(Role role) {
-	// roles.remove( role );
-	// role.getUsers().remove( this );
-	//
-
-	// }
-
+	public long count();
 }
