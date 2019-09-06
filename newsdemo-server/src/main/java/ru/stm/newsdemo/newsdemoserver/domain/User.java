@@ -38,7 +38,10 @@ public class User {
 
 	public User() {
 	}
-
+public User (Long id, String username) {//USED ONLY FOR FAKE CLASS ARTICLE
+	this.id=id;
+	this.username=username;
+}
 	public User(String username, String password, Set<Role> roles) {
 		this.username = username;
 		this.password = password;
