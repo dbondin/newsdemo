@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import ru.stm.newsdemo.newsdemoserver.domain.User;
 import ru.stm.newsdemo.newsdemoserver.service.UserService;
-import ru.stm.newsdemo.newsdemoserver.service.UserServiceImpl;
+//import ru.stm.newsdemo.newsdemoserver.service.UserServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
