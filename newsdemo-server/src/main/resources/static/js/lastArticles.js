@@ -12,7 +12,6 @@ var lastArticles = new Vue({
 		+ '</div>'
 		,
 	data : {
-		message : 'Hello Vue!',
 		articles : []
 	},
 	created: function() {

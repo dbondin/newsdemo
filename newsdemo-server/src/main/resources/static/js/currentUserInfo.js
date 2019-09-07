@@ -9,11 +9,8 @@ var currentUserInfo = new Vue({
 		+ '  <a href="/logout">Выйти</a>'
 		+ ' </div>'
 		+ ' <div v-else>'
-		+ '  <form action="/login" method="post">'
-		+ '   <div><label>Логин <input type="text" name="username"></input></label></div>'
-		+ '   <div><label>Пароль <input type="password" name="password"></input></label></div>'
-		+ '   <div><input type="submit" value="Войти"></input></div>'
-		+ '  </form>'
+		+ '  <div>Вы не залогинены</div>'
+		+ '  <a href="/login">Войти</a>'
 		+ ' </div>'
 		+ '</div>'
 		,

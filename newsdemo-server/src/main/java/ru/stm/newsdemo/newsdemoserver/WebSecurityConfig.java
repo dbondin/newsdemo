@@ -36,7 +36,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				.formLogin().permitAll()
 			.and()
-				.logout().permitAll()
+				.logout()
+				.logoutSuccessUrl("/")
+				.permitAll()
 				;
 		 /* .anonymous().and().authorizeRequests().anyRequest().authenticated()
 		 .and().formLogin().permitAll() .and().logout().permitAll() ;
