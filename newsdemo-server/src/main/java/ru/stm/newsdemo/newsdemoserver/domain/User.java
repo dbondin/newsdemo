@@ -32,16 +32,21 @@ public class User {
 	@Column(name = "password", nullable = false, unique = false)
 	private String password;
 
-	@ManyToMany(fetch = FetchType.EAGER )
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "ND_USERS_ROLES", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	private Set<Role> roles = new HashSet<>();
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "ND_USERS_ARTICLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ARTICLE_ID"))
+	private Set<Article> articles=new HashSet<>();
 
 	public User() {
 	}
-public User (Long id, String username) {//USED ONLY FOR FAKE CLASS ARTICLE
-	this.id=id;
-	this.username=username;
-}
+
+	public User(Long id, String username) {// USED ONLY FOR FAKE CLASS ARTICLE
+		this.id = id;
+		this.username = username;
+	}
+
 	public User(String username, String password, Set<Role> roles) {
 		this.username = username;
 		this.password = password;
