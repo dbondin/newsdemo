@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.JoinColumn;
 
@@ -35,8 +36,7 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "ND_USERS_ROLES", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	private Set<Role> roles = new HashSet<>();
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "ND_USERS_ARTICLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ARTICLE_ID"))
+	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
 	private Set<Article> articles=new HashSet<>();
 
 	public User() {
