@@ -18,11 +18,18 @@ public class Article {
 	private String title;
 	@Column(name = "CONTENT", nullable = false, unique = false)
 	private String content;
-	@Column(name = "POSTING_DATE", nullable = false, unique = false, columnDefinition="DATE")
-
+	@Column(name = "POSTING_DATE", nullable = false, unique = false, columnDefinition = "DATE")
 	private Date posting_date;
-	@ManyToMany(mappedBy = "articles")
-	private Set<User> users=new HashSet<>();
+	@ManyToOne
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public Long getId() {
 		return id;
@@ -56,11 +63,11 @@ public class Article {
 		this.posting_date = posting_date;
 	}
 
-	public Article(String title, String content, Date posting_date, Set<User> users) {
+	public Article(String title, String content, Date posting_date, User user) {
 		this.title = title;
 		this.content = content;
 		this.posting_date = posting_date;
-		this.users = users;
+		this.user = user;
 
 	}
 
