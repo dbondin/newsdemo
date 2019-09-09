@@ -8,8 +8,6 @@ var lastArticles = new Vue({
 		+ ' <div v-for="a in articles">'
 		+ '  <div>{{ a.title }}</div>'
 		+ '  <div>{{ a.content }}</div>'
-		+ '  <div>{{ a.posting_date }}</div>'
-		+ '  <div>{{ a.users }}</div>'
 		+ ' </div>'
 		+ '</div>'
 		,
