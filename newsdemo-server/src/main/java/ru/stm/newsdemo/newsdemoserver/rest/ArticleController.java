@@ -21,12 +21,14 @@ import ru.stm.newsdemo.newsdemoserver.domain.User;
 import ru.stm.newsdemo.newsdemoserver.rest.dto.DtoArticle;
 import ru.stm.newsdemo.newsdemoserver.rest.dto.DtoUser;
 import ru.stm.newsdemo.newsdemoserver.service.ArticleService;
+import ru.stm.newsdemo.newsdemoserver.service.RoleService;
 
 @RestController
 public class ArticleController {
 @Autowired
 ArticleService articleService;
-	/*@RequestMapping(method = RequestMethod.GET, path = "/article/last")
+
+	@RequestMapping(method = RequestMethod.GET, path = "/article/last")
 	public ResponseEntity<List<DtoArticle>> getLastArticles() {
 		List<DtoArticle> result = new ArrayList<>();
 		for (int i = 0; i < 3; ++i) {
@@ -34,9 +36,9 @@ ArticleService articleService;
 					new DtoUser(i, "Автор тестовой статьи" + i), new Date()));
 		}
 		return new ResponseEntity<List<DtoArticle>>(result, HttpStatus.OK);
-	}*/
+	}
 	
-	@RequestMapping(method=RequestMethod.GET,path="/article/last")
+	@RequestMapping(method=RequestMethod.GET,path="/article/push")
 	public ResponseEntity<Iterable<Article>> pushArticle() {
 		return new ResponseEntity<Iterable<Article>>(articleService.findAll(),HttpStatus.OK);
 	}
