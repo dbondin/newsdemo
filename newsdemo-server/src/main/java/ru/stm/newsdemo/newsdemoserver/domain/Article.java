@@ -14,21 +14,21 @@ public class Article {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ArticleIdSequenceGenerator")
 	@SequenceGenerator(sequenceName = "ND_ARTICLE_ID_SEQ", name = "ArticleIdSequenceGenerator", allocationSize = 1)
 	private Long id;
-	@Column(name = "TITLE", nullable = false, unique = true)
+	@Column(name = "TITLE", nullable = false, unique = false)
 	private String title;
 	@Column(name = "CONTENT", nullable = false, unique = false)
 	private String content;
-	@Column(name = "POSTING_DATE", nullable = false, unique = false, columnDefinition = "DATE")
-	private Date posting_date;
+	@Column(name = "POSTING_DATE", nullable = false, unique = false)
+	private Date postingDate;
 	@ManyToOne
-	private User user;
+	private User author;
 
 	public User getUser() {
-		return user;
+		return author;
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.author = user;
 	}
 
 	public Long getId() {
@@ -56,25 +56,25 @@ public class Article {
 	}
 
 	public Date getPosting_date() {
-		return posting_date;
+		return postingDate;
 	}
 
 	public void setPosting_date(Date posting_date) {
-		this.posting_date = posting_date;
+		this.postingDate = posting_date;
 	}
 
-	public Article(String title, String content, Date posting_date, User user) {
+	public Article(String title, String content, Date posting_date, User author) {
 		this.title = title;
 		this.content = content;
-		this.posting_date = posting_date;
-		this.user = user;
+		this.postingDate = posting_date;
+		this.author = author;
 
 	}
 
-	public Article(String title, String content, Date posting_date) {
+	public Article(String title, String content, Date postingDate) {
 		this.title = title;
 		this.content = content;
-		this.posting_date = posting_date;
+		this.postingDate = postingDate;
 
 	}
 
