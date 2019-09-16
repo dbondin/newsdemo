@@ -36,8 +36,6 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "ND_USERS_ROLES", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	private Set<Role> roles = new HashSet<>();
-	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
-	private Set<Article> articles=new HashSet<>();
 
 	public User() {
 	}
