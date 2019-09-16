@@ -1,29 +1,22 @@
-var pushArticlesApi = Vue.resource('/article/push');
-
-var pushArticles = new Vue({
-	el : '#pushArticles',
-	template :
-		  '<div>'
-		+ ' <h1>Загруженные статьи</h1>'
-		+ ' <div v-for="a in articles">'
-		+ '  <div>{{ a.title }}</div>'
-        + '  <div>{{ a.content }}</div>'
-        + '  <div>{{ a.posting_date }}</div>'
-        + '  <div>{{ a.user }}</div>'
-		+ ' </div>'
-		+ '</div>'
-		,
-	data : {
-		articles : []
+<template>
+<form>
+	<input type='text' v-model='title'/>
+	<input type='text' v-model='content'/>
+	<button @click='function()'>Submit</button>
+</form>
+</template>
+<script>
+	var pushArticlesApi = new Vue.resource('/article/push')({
+	el: '#pushArticles',
+	data:{
+title:'',
+content:''
 	},
-	created: function() {
-		pushArticlesApi.get({}).then(result =>
-			result.json().then(data => {
-				for(var m in data) {
-					console.log(data[m]);
-					this.articles.push(data[m]);
-				}
-			})
-		);
-	}
-});
+	methods:{
+		created: function(){
+		pushArticlesApi.save({title:this.title,content:this.content});
+		return this.added=this.success
+		    }
+	    }
+}); 
+</script>    
