@@ -55,12 +55,12 @@ public class Article {
 		this.content = content;
 	}
 
-	public Date getPosting_date() {
+	public Date getPostingDate() {
 		return postingDate;
 	}
 
-	public void setPosting_date(Date posting_date) {
-		this.postingDate = posting_date;
+	public void setPostingDate(Date postingDate) {
+		this.postingDate = postingDate;
 	}
 
 	public Article(String title, String content, Date posting_date, User author) {
