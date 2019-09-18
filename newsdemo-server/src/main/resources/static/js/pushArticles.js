@@ -1,16 +1,10 @@
-<template>
-<form>
-	<input type='text' v-model='title'/>
-	<input type='text' v-model='content'/>
-	<button @click='function()'>Submit</button>
-</form>
-</template>
-<script>
 	var pushArticlesApi = new Vue.resource('/article/push')({
 	el: '#pushArticles',
 	data:{
 title:'',
-content:''
+content:'',
+added:'',
+success:'submitted!'
 	},
 	methods:{
 		created: function(){
@@ -18,5 +12,4 @@ content:''
 		return this.added=this.success
 		    }
 	    }
-}); 
-</script>    
+});   
