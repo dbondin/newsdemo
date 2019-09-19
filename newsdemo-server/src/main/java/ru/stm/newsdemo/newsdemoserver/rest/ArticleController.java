@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ru.stm.newsdemo.newsdemoserver.domain.Article;
 import ru.stm.newsdemo.newsdemoserver.domain.PushArticleRequestBody;
+import ru.stm.newsdemo.newsdemoserver.domain.Role;
 import ru.stm.newsdemo.newsdemoserver.domain.User;
 import ru.stm.newsdemo.newsdemoserver.rest.dto.DtoArticle;
 import ru.stm.newsdemo.newsdemoserver.rest.dto.DtoUser;
@@ -44,21 +46,28 @@ public class ArticleController {
 		return ResponseEntity.ok().body(result);
 	}
 
-	@PostMapping(consumes= { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE } )
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@PreAuthorize("hasRole('ROLE_AUTHOR') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MODERATOR')")
 	public ResponseEntity<Void> doPost(Principal currentUser, @RequestBody(required = true) PushArticleRequestBody body)
 			throws URISyntaxException {
 
 		final User user = userService.findByUsername(currentUser.getName())
 				.orElseThrow(() -> new RuntimeException("Bad current user"));
+		for (Role role : user.getRoles()) {
+			if (role.getName() == "ROLE_ADMIN" || role.getName() == "ROLE_AUTHOR"
+					|| role.getName() == "ROLE_MODERATOR") {
 
-		final Article article = new Article();
-		article.setPostingDate(new Date());
-		article.setUser(user);
-		article.setTitle(body.getTitle());
-		article.setContent(body.getContent());
+				final Article article = new Article();
+				article.setPostingDate(new Date());
+				article.setUser(user);
+				article.setTitle(body.getTitle());
+				article.setContent(body.getContent());
 
-		articleService.save(article);
-
+				articleService.save(article);
+			} else {
+				break;
+			}
+		}
 		return ResponseEntity.created(new URI("http://todo")).build();
 	}
 }
