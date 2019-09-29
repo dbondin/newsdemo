@@ -38,13 +38,26 @@ var pushArticles = new Vue({
 	},
 	methods : {
 		save: function() {
-			if(currentUser.id !=-1){
-			console.log("pushArticles.save() called");
-			pushArticlesApi.save({
-					'title': this.title,
-					'content': this.content
-				});
-			}
+			currentUserInfoApi.get({}).then(result =>
+				{
+					if(result.ok) {
+						result.json().then(data => {
+							this.currentUser = data;						
+								console.log("pushArticles.save() called");
+								pushArticlesApi.save({
+										'title': this.title,
+										'content': this.content
+					
+									});
+								
+						});
+					}
+					else {
+						this.currentUser = { "id" : -1 }
+					}
+				}
+			);
+			
 		
 		},
 	}
