@@ -53,7 +53,7 @@ public class ArticleController {
 
 		final User user = userService.findByUsername(currentUser.getName())
 				.orElseThrow(() -> new RuntimeException("Bad current user"));
-		if (RoleUtils.CanCreateNewArticle(user.getRoles())==true) {
+		if (RoleUtils.isCanCreateNewArticle(user.getRoles())==true) {
 			final Article article = new Article();
 			article.setPostingDate(new Date());
 			article.setUser(user);
