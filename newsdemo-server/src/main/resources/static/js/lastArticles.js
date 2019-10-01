@@ -1,4 +1,4 @@
-var lastArticlesApi = Vue.resource('/article/last');
+var lastArticlesApi = Vue.resource('/article');
 
 var lastArticles = new Vue({
 	el : '#lastArticles',

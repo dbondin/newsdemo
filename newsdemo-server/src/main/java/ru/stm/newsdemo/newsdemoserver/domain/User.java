@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.JoinColumn;
 
@@ -32,16 +33,18 @@ public class User {
 	@Column(name = "password", nullable = false, unique = false)
 	private String password;
 
-	@ManyToMany(fetch = FetchType.EAGER )
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "ND_USERS_ROLES", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	private Set<Role> roles = new HashSet<>();
 
 	public User() {
 	}
-public User (Long id, String username) {//USED ONLY FOR FAKE CLASS ARTICLE
-	this.id=id;
-	this.username=username;
-}
+
+	public User(Long id, String username) {// USED ONLY FOR FAKE CLASS ARTICLE
+		this.id = id;
+		this.username = username;
+	}
+
 	public User(String username, String password, Set<Role> roles) {
 		this.username = username;
 		this.password = password;
