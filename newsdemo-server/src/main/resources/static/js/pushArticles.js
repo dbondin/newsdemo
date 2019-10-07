@@ -47,18 +47,20 @@ var pushArticles = new Vue({
 								pushArticlesApi.save({
 										'title': this.title,
 										'content': this.content
-					
 									});
 								
 						});
+						this.reloadPage()
 					}
 					else {
 						this.currentUser = { "id" : -1 }
 					}
 				}
 			);
-			
 		
 		},
+		reloadPage(){
+			window.location.reload()
+		}
 	}
 });
