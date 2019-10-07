@@ -7,7 +7,8 @@ var lastArticles = new Vue({
 		+ ' <h1>Последние статьи</h1>'
 		+ ' <div v-for="a in articles">'
 		+ '  <div>{{ a.title }}</div>'
-		+ '  <div>{{ a.content }}</div>'
+		+ '   <div>{{ a.content }}</div>'
+		+ '  </div>'
 		+ ' </div>'
 		+ '</div>'
 		,
