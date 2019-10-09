@@ -5,6 +5,7 @@ var lastArticles = new Vue({
 	template :
 		  '<div>'
 		+ ' <h1>Последние статьи</h1>'
+		+ '  <div>{{ current }}</div>'
 		+ ' <div v-for="a in articles">'
 		+ '  <div>{{ a.date }}</div>'
 		+ '  <div>{{ a.author.name }}</div>'
@@ -16,6 +17,7 @@ var lastArticles = new Vue({
 		+ '</div>'
 		,
 	data : {
+		'current':'',
 		articles : []
 	},
 	created: function() {
@@ -31,7 +33,8 @@ var lastArticles = new Vue({
 	methods:{
 		showdata: function(article){
 			console.log(article.content);
-			alert(article.content);
+			//alert(article.content);
+			return this.current=article.content;
 		}
 	}
 });
